@@ -15,7 +15,7 @@
 2. 在 `main.py` 中配置更新频率与同步 IP 类型
 3. 安装相关依赖包
 ```bash
-pip install -r requirentment.txt
+pip install -r requirement.txt
 ```
 4. 运行 `main.y`
 ```bash
