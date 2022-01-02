@@ -177,8 +177,8 @@ class DDNS:
             res=self.post(url, data)
             res_str = res.decode()
             split_lit = res_str.split(' ')
-            if split_lit[1] != 200:
-                logger("DDNS update failed, error code {split_lit[1]}")
+            if int(split_lit[1]) != 200:
+                logger(f"DDNS update failed, error code {split_lit[1]}")
                 logger(f"http responce: {res_str}")
             else:
                 logger("DDNS update successfully !!!")
