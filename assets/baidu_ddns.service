@@ -1,0 +1,14 @@
+[Unit]
+Description=Baidu DDNS Service
+After = network.target
+
+[Service]
+ExecStart = /usr/local/Anaconda3/bin/python main.py
+WorkingDirectory = /usr/local/programs/baidu_ddns/ 
+StandardOutput = inherit
+StandardError = inherit
+Restart = always
+User = vvd
+
+[Install]
+WantedBy=multi-user.target
