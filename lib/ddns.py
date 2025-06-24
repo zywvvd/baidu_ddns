@@ -27,20 +27,17 @@ class DDNS:
         return cls(url, AK, SK)
 
     def getTime(self):#获取网络时间戳，用于鉴权
-        url="http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp"
+        url="https://f.m.suning.com/api/ct.do"
         res=requests.get(url,timeout=5).text
-        res=json.loads(res)["data"]["t"]
+        res=json.loads(res)["currentTime"]
         return int(res)/1000
 
     def getIP(self, ip_type):#获取本地公网IP
         assert ip_type in self.IP_TYPE
         if ip_type == 'ipv4':
         
-            url="http://pv.sohu.com/cityjson?ie=utf-8"
-            res=requests.get(url,timeout=5).text
-            res=res.split("=")[1].split(";")[0] #转换javascript为json格式
-            res=json.loads(res)
-            res=res["cip"]
+            url="https://checkip.amazonaws.com/"
+            res = requests.get(url).text.strip()
 
         elif ip_type == 'ipv6':
             url="https://ipv6.ipw.cn/"
@@ -153,14 +150,14 @@ class DDNS:
         logger(f"ip type {rd_type}")
 
         # record
-        try:
-            domain_info=self.get_domain_info(domain)
-            logger(f"get domain info: {domain_info}")
-            dns_ip = domain_info['rdata'].upper()
-            recordId = domain_info['recordId']
-        except Exception as e:
-            logger(f"get domain_info failed, exception {e}")
-            return False
+        # try:
+        domain_info=self.get_domain_info(domain)
+        logger(f"get domain info: {domain_info}")
+        dns_ip = domain_info['rdata'].upper()
+        recordId = domain_info['recordId']
+        # except Exception as e:
+        #     logger(f"get domain_info failed, exception {e}")
+        #     return False
 
         if local_ip!=dns_ip:
             logger(f"local IP changed, a update will be launched.")

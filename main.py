@@ -1,5 +1,5 @@
-from mtutils import log_init
-from mtutils import Path
+from vvdutils import log_init
+from vvdutils import Path
 from lib import DDNS
 from lib import get_date_str
 import time
@@ -14,10 +14,10 @@ if __name__ == "__main__":
     sync=600 
 
     # IP 更新类型, 可选 ipv4 ipv6
-    ip_type = 'ipv6'
+    ip_type = 'ipv4'
 
     # 更新二级域名, 如 www.baidu.com 中的 www
-    domain_name = "ipv6"
+    domain_name = "uipv4"
 
     # 日志文件
     logger_file = Path('log') / (get_date_str() + '.log')
