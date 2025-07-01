@@ -1,13 +1,16 @@
 from vvdutils import log_init
 from vvdutils import Path
+import vvdutils as vv
 from lib import DDNS
 from lib import get_date_str
 import time
 
 
 if __name__ == "__main__":
+    cur_dir = vv.OS_dirname(__file__)
+    
     # 建立对象
-    config_json_path = 'assets/config.json'
+    config_json_path = vv.OS_join(cur_dir, 'assets/config.json')
     ddns_obj = DDNS.from_cofig(config_json_path)
     
     # 检测间隔时间，建议600秒
@@ -20,7 +23,7 @@ if __name__ == "__main__":
     domain_name = "uipv4"
 
     # 日志文件
-    logger_file = Path('log') / (get_date_str() + '.log')
+    logger_file = Path(cur_dir) / Path('log') / (get_date_str() + '.log')
     logger = log_init(logger_file)
     logger("*" * 60)
     logger("*" * 18 + '  Baidu DDNS start !!!  ' + "*" * 18 )
